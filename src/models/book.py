@@ -7,4 +7,4 @@ class Book(BaseModel):
     #isbn
 
 class BookWithID(Book):
-    id: int
+    id: str
