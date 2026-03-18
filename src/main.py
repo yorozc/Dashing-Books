@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from routes.home import home
-from api.book import books
+from routes.books import books
 
 app = FastAPI()
 
