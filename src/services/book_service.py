@@ -38,5 +38,10 @@ class BookService:
             return Book(**result)
         
 
-    def delete_book():
-        pass
+    def delete_book(book_id: str):
+        del_result = book_coll.find_one_and_delete({"_id": ObjectId(book_id)})
+
+        if del_result is not None:
+            return Book(**del_result)
+        
+        return HTTPException(status_code=404, detail="Book not found")

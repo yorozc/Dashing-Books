@@ -24,7 +24,7 @@ async def book(book: Book) -> BookWithID:
 async def book(book_id: str, book: Book) -> Book:
     return BookService.edit_book(book_id, book)
 
-@book_api.delete("api/book/{book_id}")
+@book_api.delete("/api/book/{book_id}")
 async def book(book_id: str):
     return BookService.delete_book(book_id)
 
