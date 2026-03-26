@@ -20,6 +20,8 @@ class BookService:
 
     def return_book_with_id(book_id: str) -> BookWithID:
         book_response = book_coll.find_one({"_id": ObjectId(book_id)})
+        if book_response is None: 
+            raise HTTPException(status_code=404, detail="Book not found")
         book_response["id"] = str(book_response["_id"])
         del book_response["_id"]
         return BookWithID(**book_response)
@@ -36,12 +38,11 @@ class BookService:
                                     return_document=True)
         if result is not None:
             return Book(**result)
+        raise HTTPException(status_code=404, detail="Book not found")
         
-
     def delete_book(book_id: str):
         del_result = book_coll.find_one_and_delete({"_id": ObjectId(book_id)})
 
         if del_result is not None:
             return Book(**del_result)
-        
-        return HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(status_code=404, detail="Book not found")
