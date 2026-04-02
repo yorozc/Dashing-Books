@@ -22,7 +22,7 @@ class BookService:
         try:
             book_response = book_coll.find_one({"_id": ObjectId(book_id)})
         except Exception as e:
-            raise HTTPException(status_code=400, detail="Not a valid ID")
+            raise HTTPException(status_code=422, detail="Not a valid ID")
         
         if book_response is None: 
             raise HTTPException(status_code=404, detail="Book not found")
@@ -43,7 +43,7 @@ class BookService:
                                         {"$set": update_data},
                                         return_document=True)
         except Exception as e:
-            raise HTTPException(status_code=400, detail="Not a valid ID")
+            raise HTTPException(status_code=422, detail="Not a valid ID")
         
         if result is not None:
             return Book(**result)
@@ -53,7 +53,7 @@ class BookService:
         try:
             del_result = book_coll.find_one_and_delete({"_id": ObjectId(book_id)})
         except Exception as e:
-            raise HTTPException(status_code=400, detail="Not a valid ID")
+            raise HTTPException(status_code=422, detail="Not a valid ID")
 
         if del_result is not None:
             return Book(**del_result)
