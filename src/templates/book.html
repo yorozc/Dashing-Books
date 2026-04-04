@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+
+{% block header %}
+    <title> Dashing-Books: {{ book.title }} </title>
+{% endblock %}
+
+{%block body %}
+
+<h2> {{book.title}} </h2>
+<p> {{book.author}} </p>
+
+{% endblock %}
