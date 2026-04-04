@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Request
+from services.book_service import BookService
 
 # creates app
 home = APIRouter()
@@ -7,4 +8,7 @@ home = APIRouter()
 @home.get("/", include_in_schema=False)
 def get_index(request: Request):
     templates = request.app.state.templates
-    return templates.TemplateResponse(request, "index.html")
+    books = BookService.return_all_books()
+    return templates.TemplateResponse(request, 
+                                      "index.html",
+                                      {"books": books})

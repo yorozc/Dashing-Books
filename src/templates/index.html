@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashing-Books</title>
+    {% block header %}
+    {% endblock %}
 </head>
 <body>
     <h1>Dashing Books</h1>
-    <p>Template should be here</p>
-    <p>should be changed</p>
+    {%for book in books %}
+        <div class="book" style="border: 1px solid red;">
+            <h1>Book {{ loop.index0 + 1 }}</h1>
+            <h2> {{ book.author }} </h2>
+            <p> {{ book.title }} </p>
+        </div>
+    {% endfor %}
+    {% block body %}
+    {% endblock %}
 </body>
 </html>
