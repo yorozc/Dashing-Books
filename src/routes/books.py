@@ -5,6 +5,7 @@ books = APIRouter()
 
 # routes to display books
 
+#get individual book
 @books.get("/books/{book_id}", include_in_schema=False)
 async def book(request: Request, book_id: str):
     templates = request.app.state.templates
@@ -14,3 +15,10 @@ async def book(request: Request, book_id: str):
                                           {"book": book})
     
     raise HTTPException(status_code=404, detail="Book not found!")
+
+# add book via post method
+
+# delete book via id
+
+# edit book via id
+

@@ -1,6 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from routes.home import home
 from routes.books import books
 from api.book_api import book_api
@@ -18,3 +21,23 @@ app.include_router(book_api)
 # connects to templates dir
 # allows connection to template across all routes
 app.state.templates = Jinja2Templates(directory="templates")
+template = Jinja2Templates(directory="templates")
+
+# exception handler
+@app.exception_handler(StarletteHTTPException)
+def general_http_exception_handler(request: Request, exception: StarletteHTTPException):
+    message = (exception.detail
+               if exception.detail
+               else "An error occurred. Please check your request and try again.")
+    
+    if request.url.path.startswith("/api"): # deals with external facing api
+        return JSONResponse(status_code=exception.status_code, content={"detail": message})
+    
+    # for template responses
+    return template.TemplateResponse(request, "error.html",
+                                            {
+                                                "status_code": exception.status_code,
+                                                "title": exception.status_code,
+                                                "message": message,
+                                            },
+                                            status_code=exception.status_code)
