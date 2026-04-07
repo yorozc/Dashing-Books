@@ -10,11 +10,10 @@ books = APIRouter()
 async def book(request: Request, book_id: str):
     templates = request.app.state.templates
     book = BookService.return_book_with_id(book_id)
-    if book:
-        return templates.TemplateResponse(request, "book.html",
+    return templates.TemplateResponse(request, "book.html",
                                           {"book": book})
     
-    raise HTTPException(status_code=404, detail="Book not found!")
+    
 
 # add book via post method
 

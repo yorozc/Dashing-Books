@@ -5,7 +5,6 @@ from fastapi import HTTPException
 
 # used to run queries on db and pass to other modules
 
-# add error handling
 class BookService:
     def __init__():
         pass
