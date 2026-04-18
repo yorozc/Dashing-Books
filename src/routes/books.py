@@ -3,6 +3,8 @@ from services.book_service import BookService
 
 books = APIRouter()
 
+# TODO: make user api
+
 # routes to display books
 
 #get individual book
@@ -12,8 +14,6 @@ async def book(request: Request, book_id: str):
     book = BookService.return_book_with_id(book_id)
     return templates.TemplateResponse(request, "book.html",
                                           {"book": book})
-    
-    
 
 # add book via post method
 

@@ -14,8 +14,7 @@ async def all_books() -> list[BookWithID]:
 @book_api.get("/api/book/{book_id}")
 async def book(book_id: str) -> BookWithID:
     return BookService.return_book_with_id(book_id)
-    
-# adds book to db
+
 @book_api.post("/api/book")
 async def book(book: Book) -> BookWithID:
     return BookService.add_book(book)
