@@ -8,7 +8,7 @@ books = APIRouter()
 # routes to display books
 
 #get individual book
-@books.get("/books/{book_id}", include_in_schema=False)
+@books.get("/{book_id}", include_in_schema=False)
 async def book(request: Request, book_id: str):
     templates = request.app.state.templates
     book = BookService.return_book_with_id(book_id)

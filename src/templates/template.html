@@ -10,6 +10,7 @@
 </head>
 <body>
     <h1>Dashing Books</h1>
+    
     {%for book in books %}
         <div class="book" style="border: 1px solid red;">
             <h1>Book {{ loop.index0 + 1 }}</h1>
@@ -19,6 +20,9 @@
                 </a>
             </h2>
             <p> {{ book.author }} </p>
+            <button id="addBookBtn">Add Book</button>
+            <button id="delBookBtn">Delete Book</button>
+            <button id="editBookBtn">Edit Book</button>
             
         </div>
     {% endfor %}
