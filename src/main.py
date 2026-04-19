@@ -7,6 +7,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from routes.home import home
 from routes.books import books
 from api.book_api import book_api
+from api.user_api import user_api
 
 app = FastAPI()
 
@@ -17,7 +18,8 @@ app.include_router(home)
 app.include_router(books, prefix="/books")
 
 # external api
-app.include_router(book_api, prefix='/api/books', tags=["books"])
+app.include_router(book_api, prefix='/api/books', tags=['books'])
+app.include_router(user_api, prefix='/api/users', tags=['users'])
 
 # connects to templates dir
 # allows connection to template across all routes
