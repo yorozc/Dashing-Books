@@ -15,7 +15,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # routes that users will access
 app.include_router(home)
-app.include_router(books)
+app.include_router(books, prefix='/books')
 
 # external api
 app.include_router(book_api, prefix='/api/books', tags=['books'])
