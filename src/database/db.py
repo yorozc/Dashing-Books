@@ -9,6 +9,7 @@ ca = certifi.where()
 URI = os.getenv("MONGODB_URI")
 DB_NAME = os.getenv("DB_NAME")
 BOOK_COLL = os.getenv("BOOK_COLL")
+USER_COLL = os.getenv("USER_COLL")
 client = MongoClient(URI, tlsCAFile=ca, server_api=ServerApi('1'))
 try:
     client.admin.command('ping')
@@ -19,3 +20,4 @@ except Exception as e:
 db = client[DB_NAME]
 
 book_coll = db[BOOK_COLL]
+user_coll = db[USER_COLL]

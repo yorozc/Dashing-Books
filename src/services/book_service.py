@@ -1,7 +1,8 @@
 from database.db import book_coll
-from models.book import Book, BookWithID
+from models.book import Book, BookWithID, BookUpdate
 from bson import ObjectId
 from fastapi import HTTPException
+from pymongo import ReturnDocument
 
 # used to run queries on db and pass to other modules
 
@@ -35,14 +36,14 @@ class BookService:
         book_response = BookWithID(id=str(result.inserted_id), **book.model_dump())
         return book_response
 
-    def edit_book(book_id: str, book: Book):
+    def edit_book(book_id: str, book: BookUpdate):
         try:
-            update_data = {k: v for k,v in book.model_dump(exclude_unset=True).items()}
+            update_data = book.model_dump(exclude_unset=True)
             result = book_coll.find_one_and_update({"_id": ObjectId(book_id)},
                                         {"$set": update_data},
-                                        return_document=True)
+                                        return_document=ReturnDocument.AFTER)
         except Exception as e:
-            raise HTTPException(status_code=422, detail="Not a valid ID")
+            raise HTTPException(status_code=422, detail=f"{e}")
         
         if result is not None:
             return Book(**result)
