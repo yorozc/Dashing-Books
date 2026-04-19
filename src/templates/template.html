@@ -10,22 +10,9 @@
 </head>
 <body>
     <h1>Dashing Books</h1>
+    <!-- url_for in fastapi takes name of function of route-->
+    <a href="{{ url_for('show_add_book') }}" id="addBookBtn">Add Book</a>
     
-    {%for book in books %}
-        <div class="book" style="border: 1px solid red;">
-            <h1>Book {{ loop.index0 + 1 }}</h1>
-            <h2> 
-                <a href="{{ url_for("book", book_id=book.id) }}">
-                    {{ book.title }}
-                </a>
-            </h2>
-            <p> {{ book.author }} </p>
-            <button id="addBookBtn">Add Book</button>
-            <button id="delBookBtn">Delete Book</button>
-            <button id="editBookBtn">Edit Book</button>
-            
-        </div>
-    {% endfor %}
     {% block body %}
     {% endblock %}
 </body>

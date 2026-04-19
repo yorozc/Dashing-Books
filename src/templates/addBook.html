@@ -1,0 +1,11 @@
+{% extends "template.html" %}
+
+{% block body %}
+    <form method="post" action="{{url_for('add_book')}}">
+        <input type="text" name="title" required><br>
+        <input type="text" name="author" required>
+        <button type="submit">Add Book</button>
+
+    </form>
+    <a href="{{ url_for('home') }}">Home</a>
+{% endblock %}

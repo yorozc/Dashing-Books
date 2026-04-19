@@ -5,7 +5,7 @@ from services.book_service import BookService
 home = APIRouter()
 
 # index route, display books in db
-@home.get("/", include_in_schema=False)
+@home.get("/", include_in_schema=False, name="home")
 @home.get("/books", include_in_schema=False)
 async def get_index(request: Request):
     templates = request.app.state.templates
