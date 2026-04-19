@@ -7,7 +7,7 @@ from services.user_service import UserService
 user_api = APIRouter()
 
 @user_api.get("/{user_id}")
-async def get_user(user_id: str) -> User:
+async def get_user(user_id: str) -> UserWithID:
     return UserService.get_user(user_id)
 
 @user_api.post("")
