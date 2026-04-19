@@ -14,10 +14,10 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # routes that users will access
 app.include_router(home)
-app.include_router(books, prefix="/book")
+app.include_router(books, prefix="/books")
 
 # external api
-app.include_router(book_api, prefix='/api/book')
+app.include_router(book_api, prefix='/api/books', tags=["books"])
 
 # connects to templates dir
 # allows connection to template across all routes

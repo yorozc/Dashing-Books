@@ -6,25 +6,25 @@ from services.book_service import BookService
 
 book_api = APIRouter()
 
-@book_api.get("/allBooks")
+@book_api.get("")
 async def all_books() -> list[BookWithID]:
     books = BookService.return_all_books()
     return books
 
 @book_api.get("/{book_id}")
-async def book(book_id: str) -> BookWithID:
+async def get_book(book_id: str) -> BookWithID:
     return BookService.return_book_with_id(book_id)
 
 @book_api.post("")
-async def book(book: Book) -> BookWithID:
+async def post_book(book: Book) -> BookWithID:
     return BookService.add_book(book)
 
 @book_api.put("/{book_id}")
-async def book(book_id: str, book: Book) -> Book:
+async def put_book(book_id: str, book: Book) -> Book:
     return BookService.edit_book(book_id, book)
 
 @book_api.delete("/{book_id}")
-async def book(book_id: str):
+async def del_book(book_id: str):
     return BookService.delete_book(book_id)
 
 
