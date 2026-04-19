@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from models.book import Book
 
-
 class User(BaseModel):
     username: str 
     email: EmailStr
